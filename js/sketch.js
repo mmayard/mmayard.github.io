@@ -21,7 +21,7 @@ var letter = 'TAG';
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0);
-  fill(0);
+  fill(255);
 
   textFont(font);
   textAlign(CENTER, CENTER);
