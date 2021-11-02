@@ -45,7 +45,7 @@ a {
 }
 .navbar {
   position: sticky;
-    background-color: white;
+    background-color: black;
     padding-top: 5px;
 
 }
@@ -172,8 +172,8 @@ margin-top: 5px;
 }
 .button3:hover {
 
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
 }
 .sub {
   font-family:'mmayard.github.io/assets/Basel-Light.otf', sans-serif;
