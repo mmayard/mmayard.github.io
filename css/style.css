@@ -15,17 +15,6 @@
   src: url("HeymlandLLWebTrial-RegularTrial.woff") format("woff");
 }
 
-
-@font-face {
-  font-family: "CircularXXWebTrial-MediumTrial";
-  src: url("CircularXXWebTrial-MediumTrial.woff") format("woff");
-}
-
-@font-face {
-  font-family: "CircularXXWebTrial-BoldTrial";
-  src: url("CircularXXWebTrial-BoldTrial.woff") format("woff");
-}
-
 /* BASE */
 
 body {
@@ -36,7 +25,7 @@ body {
     margin: 0;
     cursor: crosshair;
     background-color: black;
-
+    color: white;
 }
 
 h1 {
@@ -55,8 +44,17 @@ h2 {
 
 }
 
+h3 {
+  font-family: serif;
+  font-size: 24px;
+  color: white;
+
+}
+
 a {
     color: inherit;
+    text-decoration: underline;
+    background-color: white;
 }
 iframe {
   padding: 8px;
@@ -197,7 +195,7 @@ margin-top: 5px;
 }
 
 .columns {
-    margin: 5px;
+    margin: 0rem;
 }
 
 .columns.multiline {
@@ -238,10 +236,6 @@ margin-top: 5px;
     }
 }
 
-h3 {
-  font-size: 26px;
-  font-weight: 10px;
-}
 
 .image {
     text-align: center;
@@ -295,7 +289,7 @@ h3 {
 
 
 
-/* FORM */
+/* FORM
 
 
 #input-name, #input-email, #input-subject, #input-message {
@@ -317,8 +311,9 @@ box-decoration-break: none;
 #input-message
 {margin: 17px;
 }
+*/
 
-/*PHP*/
+/*PHP
 
 .mail {
   font-size: 18px;
@@ -366,6 +361,8 @@ margin-bottom: 20px;
   opacity:1;
   border:1px;
 }
+
+*/
 
 /*.button3 {
      text-align: inline;
