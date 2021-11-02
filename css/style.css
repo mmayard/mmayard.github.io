@@ -1,5 +1,8 @@
 
-
+@font-face {
+  font-family: "Basel-Regular.otf";
+  src: url("Basel-regular.otf") format("otf");
+}
 /* BASE */
 
 body {
@@ -150,8 +153,30 @@ margin-top: 5px;
     color: black;
 }
 
+.button3 {
+     display: inline-block;
+  /*-webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;*/
+  -webkit-appearance: none;
+  text-decoration: none;
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+   border-radius: 999px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10px;
+}
+.button3:hover {
+
+    background-color: black;
+    color: white;
+}
 .sub {
-  font-family:'assets/Basel-Light.otf', sans-serif;
+  font-family:'mmayard.github.io/assets/Basel-Light.otf', sans-serif;
   font-size: 16px;
   font-weight: lighter;
   opacity: 0.8;
