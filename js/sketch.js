@@ -25,7 +25,7 @@ function setup() {
 
   textFont(font);
   textAlign(CENTER, CENTER);
-  blendMode();
+  blendMode(DIFFERENCE);
 }
 
 function mouseMoved() {
