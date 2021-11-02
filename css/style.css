@@ -55,8 +55,11 @@ h3 {
 a {
     color: inherit;
     text-decoration: underline;
-    background-color: white;
 }
+a:hover {
+  background-color: white;
+}
+
 iframe {
   padding: 8px;
 }
