@@ -16,7 +16,7 @@
 'use strict';
 
 var font = 'serif';
-var letter = 'TAG';
+var letter = 'studio';
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -25,7 +25,7 @@ function setup() {
 
   textFont(font);
   textAlign(CENTER, CENTER);
-  blendMode(DIFFERENCE);
+  blendMode();
 }
 
 function mouseMoved() {
