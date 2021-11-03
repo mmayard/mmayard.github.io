@@ -16,7 +16,7 @@
 'use strict';
 
 var font = 'serif';
-var letter = 'studio';
+var letter = 'clique avant que la vie te cliques';
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
