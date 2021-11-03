@@ -201,7 +201,7 @@ margin-top: 5px;
 }
 
 .button3 {
-     display: flex;
+     display: inline-flex;
      text-align: center;
   /*-webkit-appearance: button;
   -moz-appearance: button;
@@ -211,14 +211,20 @@ margin-top: 5px;
   background-color: black;
   border: 1px solid white;
   color: white;
-   border-radius: 9px;
+   border-radius: 999px;
   padding: 15px 15px;
   text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: normal;
   margin: 5px;
 }
 .button2:hover {
+
+    background-color: white;
+    color: black;
+}
+
+.button3:hover {
 
     background-color: white;
     color: black;
@@ -229,7 +235,7 @@ margin-top: 5px;
 }
 
 .columns.multiline {
-    flex-wrap: wrap;
+   flex-wrap: wrap;
 }
 
 .column {
