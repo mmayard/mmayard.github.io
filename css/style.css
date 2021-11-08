@@ -31,6 +31,12 @@ body {
 #myContainer {
 
 }
+
+.names {
+  display: inline-flex;
+  font-size: 30px;
+  padding: 1rem;
+}
 h1 {
   font-family: 'HeymlandLLWebTrial-RegularTrial', sans-serif;
   font-size: 36px;
@@ -127,7 +133,6 @@ margin-top: 5px;
 
 
 .header {
-    background-color: black;
     padding: 1rem;
 }
 
@@ -208,7 +213,7 @@ margin-top: 5px;
   appearance: button;*/
   -webkit-appearance: none;
   text-decoration: none;
-  background-color: black;
+  /*background-color: black;*/
   border: 1px solid white;
   color: white;
    border-radius: 999px;
