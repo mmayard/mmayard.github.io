@@ -40,13 +40,16 @@ var drawMode = 2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  rectMode(CENTER);
+  rectMode(BURN);
   noFill();
-//  blendMode(DIFFERENCE); //
+//blendMode(MULTIPLY);
 }
 
 function draw() {
-  background(255,121,20);
+
+
+  background (255,121,20);
+  //blendMode(HARD_LIGHT);
 
   count = mouseX / 20 + 5;
   var para = min(height, mouseY) / height - 0.5;
