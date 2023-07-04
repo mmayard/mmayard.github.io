@@ -1,4 +1,4 @@
-// P_3_2_3_01
+// P_2_1_3_03
 //
 // Generative Gestaltung – Creative Coding im Web
 // ISBN: 978-3-87439-902-9, First Edition, Hermann Schmidt, Mainz, 2018
@@ -18,169 +18,91 @@
 // limitations under the License.
 
 /**
- * fontgenerator with dynamic elements. letter ouline consist of linked agents.
+ * changing positions of stapled circles in a grid
  *
  * MOUSE
- * press + position x  : letter distortion
+ * position x          : module detail
+ * position y          : module parameter
  *
  * KEYS
- * a-z                 : text input (keyboard)
- * alt                 : freeze current state
- * del, backspace      : clear screen
- * ctrl                : save png
+ * 1-3                 : draw mode
+ * arrow left/right    : number of tiles horizontally
+ * arrow up/down       : number of tiles vertically
+ * s                   : save png
  */
+'use strict';
 
-var typedKey = 'a';
-var fontPath;
+var count = 0;
+var tileCountX = 2;
+var tileCountY = 8;
 
-var spacing = 20;
-var spaceWidth = 80; // width of letter ' '
-var fontSize = 200;
-var lineSpacing = fontSize * 1.2;
-var textW = 0;
-var letterX = 50 + spacing;
-var letterY = lineSpacing;
-
-var stepSize = 2;
-var danceFactor = 1;
-
-var font;
-var pnts;
-
-var freeze = false;
+var drawMode = 2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  noLoop();
-  fill(255,255,255);
-  background(0);
-
-  opentype.load('data/FreeSansNoPunch.otf', function(err, f) {
-    if (err) {
-      print(err);
-    } else {
-      font = f;
-      pnts = getPoints(typedKey);
-      loop();
-    }
-  });
+  rectMode(CENTER);
+  noFill();
+//  blendMode(DIFFERENCE); //
 }
 
 function draw() {
-  if (!font) return;
+  background(255,121,20);
 
-  noFill();
-  push();
+  count = mouseX / 20 + 5;
+  var para = min(height, mouseY) / height - 0.5;
 
-  // translation according the actual writing position
-  translate(letterX, letterY);
+  var tileWidth = width / tileCountX;
+  var tileHeight = height / tileCountY;
 
-  // distortion on/off
-  danceFactor = 0.5;
-  if (mouseIsPressed && mouseButton == LEFT) danceFactor = map(mouseX, 0, width, 0, 3);
+  for (var gridY = 0; gridY <= tileCountY; gridY++) {
+    for (var gridX = 0; gridX <= tileCountX; gridX++) {
 
-  // are there points to draw?
-  if (pnts.length > 0) {
-    // let the points dance
-    for (var i = 0; i < pnts.length; i++) {
-      pnts[i].x += random(-stepSize, stepSize) * danceFactor;
-      pnts[i].y += random(-stepSize, stepSize) * danceFactor;
-    }
+      var posX = tileWidth * gridX + tileWidth / 2;
+      var posY = tileHeight * gridY + tileHeight / 2;
 
-    //  ------ lines: connected straight  ------
-    strokeWeight(0.05);
-    stroke(255);
-    beginShape();
-    for (var i = 0; i < pnts.length; i++) {
-      vertex(pnts[i].x, pnts[i].y);
-      ellipse(pnts[i].x, pnts[i].y, 7, 7);
-    }
-    vertex(pnts[0].x, pnts[0].y);
-    endShape();
+      push();
+      translate(posX, posY);
 
-    //  ------ lines: connected rounded  ------
-
-      strokeWeight(0.08);
-
-      beginShape();
-      // start controlpoint
-      curveVertex(pnts[pnts.length-1].x, pnts[pnts.length-1].y);
-      // only these points are drawn
-      for (var i = 0; i < pnts.length; i++) {
-        curveVertex(pnts[i].x, pnts[i].y);
+      // switch between modules
+      switch (drawMode) {
+      case 1:
+        translate(-tileWidth / 2, -tileHeight / 2);
+        for (var i = 0; i < count; i++) {
+          line(0, (para + 0.5) * tileHeight, tileWidth, i * tileHeight / count);
+          line(0, i * tileHeight / count, tileWidth, tileHeight - (para + 0.5) * tileHeight);
+        }
+        break;
+      case 2:
+        for (var i = 0; i <= count; i++) {
+          line(para * tileWidth, para * tileHeight, tileWidth / 2, (i / count - 0.5) * tileHeight);
+          line(para * tileWidth, para * tileHeight, -tileWidth / 2, (i / count - 0.5) * tileHeight);
+          line(para * tileWidth, para * tileHeight, (i / count - 0.5) * tileWidth, tileHeight / 2);
+          line(para * tileWidth, para * tileHeight, (i / count - 0.5) * tileWidth, -tileHeight / 2);
+        }
+        break;
+      case 3:
+        for (var i = 0; i <= count; i++) {
+          line(0, para * tileHeight, tileWidth / 2, (i / count - 0.5) * tileHeight);
+          line(0, para * tileHeight, -tileWidth / 2, (i / count - 0.5) * tileHeight);
+          line(0, para * tileHeight, (i / count - 0.5) * tileWidth, tileHeight / 2);
+          line(0, para * tileHeight, (i / count - 0.5) * tileWidth, -tileHeight / 2);
+        }
+        break;
       }
-      curveVertex(pnts[0].x, pnts[0].y);
-      // end controlpoint
-      curveVertex(pnts[1].x, pnts[1].y);
-      endShape();
 
-  }
+      pop();
 
-  pop();
-}
-
-function getPoints() {
-  fontPath = font.getPath(typedKey, 0, 0, 100);
-  var path = new g.Path(fontPath.commands);
-  path = g.resampleByLength(path, 25);
-  textW = path.bounds().width;
-  // remove all commands without a coordinate
-  for (var i = path.commands.length - 1; i >= 0 ; i--) {
-    if (path.commands[i].x == undefined) {
-      path.commands.splice(i, 1);
     }
   }
-  return path.commands;
 }
 
 function keyReleased() {
-  // export png
-  if (keyCode == CONTROL) saveCanvas(gd.timestamp(), 'png');
-  if (keyCode == ALT) {
-    // switch loop on/off
-    freeze = !freeze;
-    if (freeze) {
-      noLoop();
-    } else {
-      loop();
-    }
-  }
-}
-
-function keyPressed() {
-  switch (keyCode) {
-  case ENTER:
-  case RETURN:
-    typedKey = '';
-    pnts = getPoints(typedKey);
-    letterY += lineSpacing;
-    letterX = 50;
-    break;
-  case BACKSPACE:
-  case DELETE:
-    background(255);
-    typedKey = '';
-    pnts = getPoints(typedKey);
-    letterX = 50;
-    letterY = lineSpacing;
-    freeze = false;
-    loop();
-    break;
-  }
-}
-
-function keyTyped() {
-  if (keyCode >= 32) {
-    if (keyCode == 32) {
-      typedKey = '';
-      letterX += textW + spaceWidth;
-      pnts = getPoints(typedKey);
-    } else {
-      typedKey = key;
-      letterX += textW + spacing;
-      pnts = getPoints(typedKey);
-    }
-    freeze = false;
-    loop();
-  }
+  if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), 'png');
+  if (key == '1') drawMode = 1;
+  if (key == '2') drawMode = 2;
+  if (key == '3') drawMode = 3;
+  if (keyCode == DOWN_ARROW) tileCountY = max(tileCountY - 1, 1);
+  if (keyCode == UP_ARROW) tileCountY += 1;
+  if (keyCode == LEFT_ARROW) tileCountX = max(tileCountX - 1, 1);
+  if (keyCode == RIGHT_ARROW) tileCountX += 1;
 }
